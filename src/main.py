@@ -39,6 +39,11 @@ window.config(background="white")
 
 #Set base buttons
 exit_button = Button(window, text="Exit", background="red", command=exit)
+browse_button = Button(window,text="Browse", command=BrowseForFile)
+
+#Button locations
+exit_button.place(x=460, y=260)
+browse_button.place(x=400,y=260)
 
 
 window.mainloop()
