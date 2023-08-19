@@ -1,4 +1,4 @@
-#! ../venv python
+#! ./venv/Scripts/python
 """
 main.py starts a gui application that is used input and process credit transaction 
 data and outputs those that are fraud.
@@ -13,40 +13,43 @@ __status__ = "Devlopment"
 
 #Native Libraries
 from tkinter import *
-import os
-import sys
-
-#3rd Party Libraries
-import joblib
-import pandas as pd
+from tkinter import filedialog
+import os, sys
 
 #Custom Libraries
+from backend import Backend
 
 
-LRMODEL = joblib.load("./src/LogisticRegressionML/LogisticRegressionModel.joblib")
 
-filepath = None
-df = None
+backend_handler = Backend()
 
 def BrowseForFile():
-    pass
-
-def DataPreprocessing():
-    pass
+    path = filedialog.askopenfilename(initialdir=os.getcwd(),
+                                      title="Select a File",
+                                      filetypes=(("CSV Files", "*.csv"),)
+                                      )
+    backend_handler.filepath = path
+   
 
 def LogisticRegressionPrediction():
-    if df is None:
+    if backend_handler.df is None:
         header = "No Imported Data"
         body = "You need to import data ot the application using Browse."
         PopUpHandler(header,body)
 
 def PopUpHandler(header:str, body:str):
+    #Create popup and set correct settings. Disables application when popup is active.
     popup = Toplevel()
     popup.title(header)
-
+    popup.resizable(height=False, width=False)
+    popup.grab_set()
+   
+    #Label for bodytext. Setting the label's window to popup.
     label = Label(popup, text=body)
     label.pack(padx=20, pady=20)
 
+    #Creates new button for closing the popup and destroys it
+    #enabling application to perform agains
     close_button = Button(popup, text="Close", command=popup.destroy)
     close_button.pack()
     popup.wait_window(popup)
