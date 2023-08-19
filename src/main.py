@@ -28,14 +28,15 @@ def BrowseForFile():
                                       title="Select a File",
                                       filetypes=(("CSV Files", "*.csv"),)
                                       )
-    backend_handler.filepath = path
+    backend_handler.data_importation(path)
    
 
 def LogisticRegressionPrediction():
-    if backend_handler.df is None:
+    if backend_handler.scaled_df is None:
         header = "No Imported Data"
         body = "You need to import data ot the application using Browse."
         PopUpHandler(header,body)
+    backend_handler.data_prediction()
 
 def PopUpHandler(header:str, body:str):
     #Create popup and set correct settings. Disables application when popup is active.
