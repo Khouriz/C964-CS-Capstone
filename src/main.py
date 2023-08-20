@@ -13,30 +13,46 @@ __status__ = "Devlopment"
 
 #Native Libraries
 from tkinter import *
-from tkinter import filedialog
-import os, sys
+from tkinter import filedialog, ttk
+import os
+
+#3rd Party Libraries
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
 
 #Custom Libraries
 from backend import Backend
 
+#Constants
+HEADERS = ['Time','Amount', 'Class']
 
-
+#created a Backend object to handle everything not in the perview of the frontend gui
 backend_handler = Backend()
 
 def BrowseForFile():
+    #Uses native windows file explorer to find correct file
     path = filedialog.askopenfilename(initialdir=os.getcwd(),
                                       title="Select a File",
                                       filetypes=(("CSV Files", "*.csv"),)
                                       )
+    #imports the data into the backend_handler
     backend_handler.data_importation(path)
    
 
 def LogisticRegressionPrediction():
+    #if there is no data that is loaded then an error is shown to the user explaining the issue.
     if backend_handler.scaled_df is None:
         header = "No Imported Data"
         body = "You need to import data ot the application using Browse."
         PopUpHandler(header,body)
+    #predicts on the data that is loaded.
     backend_handler.data_prediction()
+    DataTableTabCreation()
+    PieTabCreation()
+    BarTabCreation()
+
+
 
 def PopUpHandler(header:str, body:str):
     #Create popup and set correct settings. Disables application when popup is active.
@@ -55,12 +71,41 @@ def PopUpHandler(header:str, body:str):
     close_button.pack()
     popup.wait_window(popup)
 
+def BarTabCreation():
+    pass
+
+def PieTabCreation():
+    pass
+
+def DataTableTabCreation():
+    pass
+
+
 #Create Tk window as set attributes
 window = Tk()
 window.title("Crazy Corp Credit Fraud Detection")
-window.geometry("500x300")
+window.geometry("600x500")
 window.resizable(height=False, width=False)
 window.config(background="white")
+
+#tab settings
+tab_handler = ttk.Notebook(window)
+tab_handler.pack(expand=1, fill="both")
+
+#Tab #1
+bar_tab = ttk.Frame(tab_handler)
+
+tab_handler.add(bar_tab, text="Bar Chart")
+
+#Tab #2
+pie_tab = ttk.Frame(tab_handler)
+
+tab_handler.add(pie_tab, text="Pie Chart")
+
+#Tab #3
+data_table_tab = ttk.Frame(tab_handler)
+
+tab_handler.add(data_table_tab, text="Data Table")
 
 #Set base buttons
 exit_button = Button(window, text="Exit", background="red", command=exit)
@@ -68,9 +113,9 @@ browse_button = Button(window,text="Browse", command=BrowseForFile)
 submit_button = Button(window, text="Submit", command=LogisticRegressionPrediction)
 
 #Button locations
-exit_button.place(x=460, y=260)
-browse_button.place(x=400,y=260)
-submit_button.place(x=340, y=260)
+exit_button.place(x=560, y=465)
+browse_button.place(x=500,y=465)
+submit_button.place(x=440, y=465)
 
 window.mainloop()
 

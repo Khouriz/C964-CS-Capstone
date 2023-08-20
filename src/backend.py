@@ -24,7 +24,7 @@ warnings.filterwarnings("ignore")
 class Backend():
     def __init__(self):
         self.out_path = "./src/output/output.csv"
-        self.LRMODEL = joblib.load("./src/LogisticRegressionML/LogisticRegressionModel.joblib")
+        self.LRMODEL = joblib.load("./src/LogisticRegressionModel.joblib")
         self.df = None
         self.scaled_df = None
         self.predictions = None
