@@ -20,6 +20,7 @@ import os
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
+import seaborn as sns
 
 #Custom Libraries
 from backend import Backend
@@ -48,10 +49,8 @@ def LogisticRegressionPrediction():
         PopUpHandler(header,body)
     #predicts on the data that is loaded.
     backend_handler.data_prediction()
-    DataTableTabCreation()
-    PieTabCreation()
     BarTabCreation()
-
+    PieTabCreation()
 
 
 def PopUpHandler(header:str, body:str):
@@ -72,14 +71,21 @@ def PopUpHandler(header:str, body:str):
     popup.wait_window(popup)
 
 def BarTabCreation():
-    pass
+    fig = Figure(figsize=(5,4))
+    ax = fig.add_subplot()
+    sns.countplot(data=backend_handler.df, x="Class", ax=ax)
+    ax.set_xlabel("Non-Fraud vs. Fraud")
+    ax.set_ylabel("Count")
+    bar_canvas = FigureCanvasTkAgg(fig,master=bar_tab)
+    bar_canvas.get_tk_widget().pack(fill=BOTH, expand=True)
 
 def PieTabCreation():
-    pass
-
-def DataTableTabCreation():
-    pass
-
+    fig = Figure(figsize=(5,4))
+    ax = fig.add_subplot()
+    counts = backend_handler.df["Class"].value_counts()
+    ax.pie(counts, labels=counts.index, autopct='%1.1f%%' ,colors = sns.color_palette("pastel"), startangle=120)
+    pie_canvas = FigureCanvasTkAgg(fig, master=pie_tab)
+    pie_canvas.get_tk_widget().pack(fill=BOTH, expand=True)
 
 #Create Tk window as set attributes
 window = Tk()
@@ -94,18 +100,11 @@ tab_handler.pack(expand=1, fill="both")
 
 #Tab #1
 bar_tab = ttk.Frame(tab_handler)
-
 tab_handler.add(bar_tab, text="Bar Chart")
 
 #Tab #2
 pie_tab = ttk.Frame(tab_handler)
-
 tab_handler.add(pie_tab, text="Pie Chart")
-
-#Tab #3
-data_table_tab = ttk.Frame(tab_handler)
-
-tab_handler.add(data_table_tab, text="Data Table")
 
 #Set base buttons
 exit_button = Button(window, text="Exit", background="red", command=exit)
