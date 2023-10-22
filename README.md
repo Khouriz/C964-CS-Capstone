@@ -2,7 +2,7 @@
 
 ## Introduction
 
-> *You can skip to the [Table of Contents](#table%20of%20contents).*
+> *You can skip to the [Table of Contents](#table-of-contents).*
 
 Welcome to my CS Capstone project for WGU C964. The scenarios used for the conceptions of this project was the following:
 
