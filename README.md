@@ -2,7 +2,7 @@
 
 ## Introduction
 
-> *You can skip to the [Table of Contents](#table-of-contents).*
+> *You can skip to the [Table of Contents](#table%20of%20contents).*
 
 Welcome to my CS Capstone project for WGU C964. The scenarios used for the conceptions of this project was the following:
 
@@ -96,7 +96,7 @@ pip install jupyterlab
 	1) If it does not:
 		1) Click on select interpreter 
 			1) A drop down should appear at the top on the window
-		2) Select the line that says Python 3.11.4 64-bit 
+		2) Select the line that says Python 3.11.x 64-bit 
 7) In the top right click the play symbol  
 8) After the GUI loads press browse and select your data that is formatted like `example_data_formatting.csv` 
 9) Click Submit :
