@@ -34,15 +34,16 @@ The core portion of the application that will be used by most users is the deskt
 4) [Maintenance](#maintenance)
 ## Requirements
 
-- A machine that can run: 
+- System Requirements: 
 	- Python 3.11.x
 	- Visual Studio Code
-- Must have third-party libraries:
+- Required third-party libraries:
 	- matplotlib
 	- seaborn
 	- pandas
 	- scikit-learn
-	- jupyterlab (optional)
+- Optional third-party libraries:
+	- jupyterlab
 
 ***Will go over installation below!***
 ## Installation 
