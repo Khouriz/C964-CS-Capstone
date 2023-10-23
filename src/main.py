@@ -4,12 +4,11 @@ main.py starts a gui application that is used input and process credit transacti
 data and outputs those that are fraud.
 """
 
-__author__ = "Andrew Zulfa"
-__credits__ = ["Andrew Zulfa"]
-__version__ = "1.0.1"
-__maintainer__ = "Andrew Zulfa"
-__email__ = "azulfa@wgu.edu"
-__status__ = "Devlopment"
+__author__ = "Khouriz"
+__credits__ = ["Khouriz"]
+__version__ = "1.0.0"
+__maintainer__ = "Khouriz"
+__status__ = "Production"
 
 #Native Libraries
 from tkinter import *
